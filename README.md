@@ -4,6 +4,8 @@ A small Express/Node.js site that pulls recipes live from [TheCocktailDB](https:
 using Axios and renders them with EJS. Search a cocktail by name, browse by
 category, or hit "pour me something random" for a surprise.
 
+**Live demo:** https://back-bar-cocktails.netlify.app
+
 TheCocktailDB's free tier needs no signup, no API key, and no auth headers,
 so there's nothing to configure — clone it and run it.
 
@@ -41,22 +43,55 @@ Optional: set a `PORT` environment variable to run on something other than
 
 ```
 back-bar-cocktails/
-├── server.js              # Express app setup, static files, error handlers
+├── app.js                  # Express app setup: view engine, static files, routes, error handlers
+├── server.js               # Local dev entry point (requires app.js, calls .listen())
+├── netlify.toml             # Netlify build/redirect config
+├── netlify/functions/
+│   └── server.js           # Wraps app.js as a Netlify Function via serverless-http
 ├── routes/
-│   └── cocktails.js       # All page routes (home, search, category, random, detail)
+│   └── cocktails.js        # All page routes (home, search, category, random, detail)
 ├── services/
-│   └── cocktailApi.js     # Axios calls to TheCocktailDB + ingredient parsing
+│   └── cocktailApi.js      # Axios calls to TheCocktailDB + ingredient parsing
 ├── views/
 │   ├── partials/
-│   │   ├── header.ejs     # <head>, site header, nav search
-│   │   └── footer.ejs     # site footer, closing tags
-│   ├── index.ejs          # home page: search, random button, category shelf
-│   ├── results.ejs        # search/category results grid
-│   ├── cocktail.ejs       # full recipe detail ("order ticket")
-│   └── error.ejs          # 404 / API failure / empty-result page
+│   │   ├── header.ejs      # <head>, site header, nav search
+│   │   └── footer.ejs      # site footer, closing tags
+│   ├── index.ejs           # home page: search, random button, category shelf
+│   ├── results.ejs         # search/category results grid
+│   ├── cocktail.ejs        # full recipe detail ("order ticket")
+│   └── error.ejs           # 404 / API failure / empty-result page
 └── public/
-    └── css/style.css      # all styling
+    └── css/style.css       # all styling
 ```
+
+## Deploying to Netlify
+
+This app is a normal Express server, but Netlify only hosts static files and
+serverless functions - it doesn't run a persistent Node process. `app.js`
+holds the Express app itself (no `.listen()`), so it can be reused two ways:
+
+- **Locally:** `server.js` requires `app.js` and calls `.listen()`.
+- **On Netlify:** `netlify/functions/server.js` wraps the same `app.js` with
+  [`serverless-http`](https://github.com/dougmoscrop/serverless-http) so it
+  runs as a single Netlify Function.
+
+`netlify.toml` publishes `public/` directly (so `/css/style.css` is served
+by the CDN, not the function) and redirects every other path to the
+function, which handles all the dynamic routes exactly like it does locally.
+
+To deploy your own copy:
+
+```bash
+npm install -g netlify-cli
+netlify login
+netlify init      # or: netlify sites:create --name your-site-name
+netlify deploy --prod
+```
+
+One gotcha worth knowing: Express loads the EJS view engine dynamically by
+name, which Netlify's function bundler can't trace statically - without an
+explicit `require('ejs')` in `app.js`, the deployed function fails with
+`Cannot find module 'ejs'` even though it works fine locally.
 
 ## API used
 
