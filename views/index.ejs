@@ -1,0 +1,31 @@
+<%- include('partials/header', { title: '' }) %>
+
+<section class="hero">
+  <p class="hero__eyebrow">est. tonight</p>
+  <h1 class="hero__title">What are we drinking tonight?</h1>
+  <p class="hero__sub">Search a name, a spirit, or a mood &mdash; we&rsquo;ll pull the recipe.</p>
+
+  <form class="hero-search" action="/search" method="GET">
+    <input type="text" name="q" placeholder="e.g. margarita, mojito, whiskey sour" aria-label="Search cocktails" required autofocus />
+    <button type="submit">Find it</button>
+  </form>
+
+  <a class="cta-random" href="/random">Pour me something random</a>
+</section>
+
+<% if (shelfError) { %>
+  <p class="inline-note"><%= shelfError %></p>
+<% } %>
+
+<% if (categories && categories.length) { %>
+<section class="shelf">
+  <h2 class="shelf__heading">Browse the shelf</h2>
+  <div class="shelf__row">
+    <% categories.forEach(function (category) { %>
+      <a class="bottle-chip" href="/category/<%= encodeURIComponent(category) %>"><%= category %></a>
+    <% }); %>
+  </div>
+</section>
+<% } %>
+
+<%- include('partials/footer') %>

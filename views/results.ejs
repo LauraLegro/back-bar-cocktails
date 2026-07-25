@@ -1,0 +1,23 @@
+<%- include('partials/header', { title: heading }) %>
+
+<section class="results">
+  <h1 class="results__heading"><%= heading %></h1>
+
+  <% if (!drinks || drinks.length === 0) { %>
+    <div class="ticket-86">
+      <span class="ticket-86__stamp">86</span>
+      <p>Nothing behind the bar matches that. Try another spelling, or browse the shelf from the <a href="/">home page</a>.</p>
+    </div>
+  <% } else { %>
+    <div class="coaster-grid">
+      <% drinks.forEach(function (drink) { %>
+        <a class="coaster" href="/cocktail/<%= drink.idDrink %>">
+          <span class="coaster__image" style="background-image: url('<%= drink.strDrinkThumb %>/preview')"></span>
+          <span class="coaster__name"><%= drink.strDrink %></span>
+        </a>
+      <% }); %>
+    </div>
+  <% } %>
+</section>
+
+<%- include('partials/footer') %>

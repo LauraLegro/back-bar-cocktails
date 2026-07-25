@@ -1,0 +1,42 @@
+<%- include('partials/header', { title: drink.strDrink }) %>
+
+<section class="detail">
+  <figure class="polaroid">
+    <img src="<%= drink.strDrinkThumb %>" alt="<%= drink.strDrink %>" />
+    <figcaption><%= drink.strDrink %></figcaption>
+  </figure>
+
+  <article class="ticket">
+    <div class="ticket__head">
+      <span class="ticket__no">No. <%= drink.idDrink %></span>
+      <% if (drink.strCategory) { %>
+        <span class="ticket__stamp"><%= drink.strCategory %></span>
+      <% } %>
+    </div>
+
+    <h1 class="ticket__title"><%= drink.strDrink %></h1>
+    <p class="ticket__meta">
+      <%= drink.strAlcoholic || 'Alcoholic' %><% if (drink.strGlass) { %> &middot; served in a <%= drink.strGlass.toLowerCase() %><% } %>
+    </p>
+
+    <div class="ticket__divider" role="presentation"></div>
+
+    <ul class="ticket__ingredients">
+      <% ingredients.forEach(function (item) { %>
+        <li>
+          <span class="ticket__ingredient"><%= item.ingredient %></span>
+          <span class="ticket__leader" aria-hidden="true"></span>
+          <span class="ticket__measure"><%= item.measure || 'to taste' %></span>
+        </li>
+      <% }); %>
+    </ul>
+
+    <div class="ticket__divider" role="presentation"></div>
+
+    <p class="ticket__instructions"><%= drink.strInstructions %></p>
+  </article>
+</section>
+
+<p class="detail__back"><a href="/">&larr; back to the bar</a></p>
+
+<%- include('partials/footer') %>

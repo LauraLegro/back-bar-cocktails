@@ -1,0 +1,9 @@
+<%- include('partials/header', { title: title || "86'd" }) %>
+
+<section class="error-board">
+  <div class="chalk-badge">86&rsquo;d</div>
+  <p class="error-board__message"><%= message %></p>
+  <a class="cta-random" href="<%= backHref || '/' %>">Back to the bar</a>
+</section>
+
+<%- include('partials/footer') %>
