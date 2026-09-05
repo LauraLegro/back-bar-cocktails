@@ -6,11 +6,11 @@
    when building a drink.
 ------------------------------------------------------------------ */
 :root {
-  --ink: #2a1d14;
+  --ink: #bd601d;
   --paper: #f3e9d8;
   --paper-shadow: #dcc9a3;
-  --bar-dark: #1b1410;
-  --bar-panel: #241a14;
+  --bar-dark: #745039;
+  --bar-panel: #3d281a;
   --amber: #d98a2b;
   --amber-bright: #f0a83e;
   --bitters: #33493b;
@@ -18,21 +18,26 @@
   --cream: #f3ead9;
   --line: rgba(243, 234, 217, 0.14);
 
-  --font-display: 'Fraunces', Georgia, serif;
-  --font-body: 'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Public Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.001ms !important;
     transition-duration: 0.001ms !important;
   }
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   background: var(--bar-dark);
@@ -41,7 +46,10 @@ html, body {
   line-height: 1.5;
 }
 
-a { color: inherit; text-decoration: none; }
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
 a:focus-visible,
 button:focus-visible,
@@ -60,6 +68,7 @@ input:focus-visible {
    Header
 ------------------------------------------------------------------ */
 .site-header {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 24px;
@@ -106,7 +115,9 @@ input:focus-visible {
   min-width: 200px;
 }
 
-.header-search input::placeholder { color: rgba(243, 234, 217, 0.45); }
+.header-search input::placeholder {
+  color: rgba(243, 234, 217, 0.45);
+}
 
 .header-search button {
   background: var(--amber);
@@ -120,9 +131,17 @@ input:focus-visible {
   transition: background 0.15s ease;
 }
 
-.header-search button:hover { background: var(--amber-bright); }
+.header-search button:hover {
+  background: var(--amber-bright);
+}
 
 .pour-link {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  padding: 6px 12px;
   font-family: var(--font-mono);
   font-size: 0.8rem;
   text-transform: uppercase;
@@ -132,7 +151,9 @@ input:focus-visible {
   white-space: nowrap;
 }
 
-.pour-link:hover { border-bottom-color: var(--amber); }
+.pour-link:hover {
+  border-bottom-color: var(--amber);
+}
 
 /* ---------------------------------------------------------------
    Hero
@@ -184,7 +205,9 @@ input:focus-visible {
   font-size: 1rem;
 }
 
-.hero-search input::placeholder { color: rgba(243, 234, 217, 0.4); }
+.hero-search input::placeholder {
+  color: rgba(243, 234, 217, 0.4);
+}
 
 .hero-search button {
   background: var(--amber);
@@ -198,10 +221,14 @@ input:focus-visible {
   transition: background 0.15s ease;
 }
 
-.hero-search button:hover { background: var(--amber-bright); }
+.hero-search button:hover {
+  background: var(--amber-bright);
+}
 
 .cta-random {
-  display: inline-block;
+  display: block;
+  width: 80%;
+  margin: 24px auto 0;
   font-family: var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -212,7 +239,9 @@ input:focus-visible {
   padding: 12px 24px;
   border-radius: 4px;
   box-shadow: 0 3px 0 rgba(0, 0, 0, 0.25);
-  transition: transform 0.15s ease, background 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease;
 }
 
 .cta-random:hover {
@@ -230,7 +259,9 @@ input:focus-visible {
 /* ---------------------------------------------------------------
    Shelf (category chips)
 ------------------------------------------------------------------ */
-.shelf { padding: 40px 0 0; }
+.shelf {
+  padding: 40px 0 0;
+}
 
 .shelf__heading {
   font-family: var(--font-mono);
@@ -257,7 +288,9 @@ input:focus-visible {
   padding: 8px 14px;
   border-radius: 3px;
   border: 1px solid transparent;
-  transition: border-color 0.15s ease, transform 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    transform 0.15s ease;
 }
 
 .bottle-chip:hover {
@@ -268,7 +301,9 @@ input:focus-visible {
 /* ---------------------------------------------------------------
    Results grid (coasters)
 ------------------------------------------------------------------ */
-.results { padding: 56px 0 0; }
+.results {
+  padding: 56px 0 0;
+}
 
 .results__heading {
   font-family: var(--font-display);
@@ -292,7 +327,9 @@ input:focus-visible {
   transition: transform 0.15s ease;
 }
 
-.coaster:hover { transform: rotate(-2deg) translateY(-4px); }
+.coaster:hover {
+  transform: rotate(-2deg) translateY(-4px);
+}
 
 .coaster__image {
   width: 100%;
@@ -347,7 +384,10 @@ input:focus-visible {
   color: rgba(243, 234, 217, 0.8);
 }
 
-.ticket-86 a { color: var(--amber); border-bottom: 1px solid var(--amber); }
+.ticket-86 a {
+  color: var(--amber);
+  border-bottom: 1px solid var(--amber);
+}
 
 /* ---------------------------------------------------------------
    Detail page: polaroid photo + order ticket (signature element)
@@ -398,13 +438,17 @@ input:focus-visible {
 }
 
 .ticket::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   right: 0;
   bottom: -10px;
   height: 20px;
-  background-image: radial-gradient(circle, var(--bar-dark) 9px, transparent 9.5px);
+  background-image: radial-gradient(
+    circle,
+    var(--bar-dark) 9px,
+    transparent 9.5px
+  );
   background-size: 24px 20px;
   background-position: 0 -10px;
   background-repeat: repeat-x;
@@ -469,7 +513,9 @@ input:focus-visible {
   padding: 4px 0;
 }
 
-.ticket__ingredient { white-space: nowrap; }
+.ticket__ingredient {
+  white-space: nowrap;
+}
 
 .ticket__leader {
   flex: 1;
@@ -539,7 +585,9 @@ input:focus-visible {
   color: rgba(243, 234, 217, 0.5);
 }
 
-.site-footer a { color: var(--amber); }
+.site-footer a {
+  color: var(--amber);
+}
 
 /* ---------------------------------------------------------------
    Responsive
@@ -551,13 +599,24 @@ input:focus-visible {
     gap: 14px;
   }
 
-  .wordmark { margin-right: 0; align-items: center; text-align: center; }
+  .wordmark {
+    margin-right: 0;
+    align-items: center;
+    text-align: center;
+  }
 
-  .header-search { justify-content: center; }
+  .header-search {
+    justify-content: center;
+  }
 
-  .header-search input { min-width: 0; flex: 1; }
+  .header-search input {
+    min-width: 0;
+    flex: 1;
+  }
 
-  .pour-link { text-align: center; }
+  .pour-link {
+    text-align: center;
+  }
 
   .detail {
     grid-template-columns: 1fr;
