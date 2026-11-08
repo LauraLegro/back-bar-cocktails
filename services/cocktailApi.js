@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from 'axios';
 
 // TheCocktailDB's free test tier (key "1") - no signup, no auth header,
 // and CORS-enabled. Docs: https://www.thecocktaildb.com/api.php
@@ -60,7 +60,7 @@ async function filterByCategory(category) {
   return data.drinks || [];
 }
 
-module.exports = {
+export default {
   extractIngredients,
   searchByName,
   lookupById,

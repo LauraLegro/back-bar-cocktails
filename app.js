@@ -1,7 +1,10 @@
-const express = require('express');
-const path = require('path');
-const ejs = require('ejs');
-const cocktailRoutes = require('./routes/cocktails');
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import ejs from 'ejs';
+import cocktailRoutes from './routes/cocktails.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 
@@ -36,11 +39,30 @@ app.use((req, res) => {
 // crashing the app or leaking a stack trace to the user.
 app.use((err, req, res, next) => {
   console.error(err);
-  res.status(500).render('error', {
-    title: "86'd",
-    message: 'Something spilled on our end. Give it another go in a moment.',
-    backHref: '/',
-  });
+
+  if (res.headersSent) {
+    return next(err);
+  }
+
+  const message =
+    err?.response?.status === 403 || err?.code === 'ENOTFOUND' || err?.code === 'ECONNREFUSED'
+      ? 'Cannot reach TheCocktailDB right now. Check your internet connection and try again.'
+      : 'Something spilled on our end. Give it another go in a moment.';
+
+  res.status(500).render(
+    'error',
+    {
+      title: "86'd",
+      message,
+      backHref: '/',
+    },
+    (renderErr) => {
+      if (renderErr) {
+        console.error(renderErr);
+        res.status(500).type('text').send(message);
+      }
+    }
+  );
 });
 
-module.exports = app;
+export default app;
