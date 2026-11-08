@@ -2,12 +2,22 @@
   "name": "back-bar-cocktails",
   "version": "1.0.0",
   "description": "Express + Axios + EJS app that searches TheCocktailDB for cocktail recipes.",
+  "homepage": "https://github.com/LauraLegro/back-bar-cocktails#readme",
+  "bugs": {
+    "url": "https://github.com/LauraLegro/back-bar-cocktails/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LauraLegro/back-bar-cocktails.git"
+  },
+  "license": "MIT",
+  "author": "",
+  "type": "module",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
-  "license": "MIT",
   "dependencies": {
     "axios": "^1.7.9",
     "ejs": "^3.1.10",

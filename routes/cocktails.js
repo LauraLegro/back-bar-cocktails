@@ -1,5 +1,5 @@
-const express = require('express');
-const cocktailApi = require('../services/cocktailApi');
+import express from 'express';
+import cocktailApi from '../services/cocktailApi.js';
 
 const router = express.Router();
 
@@ -78,4 +78,4 @@ router.get('/cocktail/:id', async (req, res, next) => {
   }
 });
 
-module.exports = router;
+export default router;

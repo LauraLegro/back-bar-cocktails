@@ -1,0 +1,14 @@
+{
+  "watch": [
+    "app.js",
+    "server.js",
+    "package.json",
+    "routes",
+    "services",
+    "views",
+    "netlify/functions"
+  ],
+  "ext": "js,ejs,json",
+  "ignore": [".netlify/**", "node_modules/**", "public/**", "package-lock.json"],
+  "delay": 400
+}
